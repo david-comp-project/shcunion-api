@@ -21,6 +21,13 @@ use App\Http\Controllers\ProjectTimelineController;
 use App\Http\Controllers\ProjectEvaluationController;
 
 Route::prefix('v1')->group(function () {
+    Route::get('/', function () {
+        return response()->json([
+            'message' => 'Welcome to the API',
+            'version' => '1.0.0'
+        ]);
+    });
+
     Route::post('/sign-up',[RegistrationController::class, 'signup']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/auth/{provider}/redirect', [AuthController::class, 'redirectToProvider']);
