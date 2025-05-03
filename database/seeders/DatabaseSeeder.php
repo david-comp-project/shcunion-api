@@ -23,6 +23,19 @@ class DatabaseSeeder extends Seeder
             IconSeeder::class,
             PaymentMethodSeeder::class,
             SocialMediaSeeder::class,
+
+            ProjectSeeder::class,
+            ProjectCreatorInformationSeeder::class,
+            ProjectBeneficialInformationSeeder::class,
+            ProjectTimelineSeeder::class,
+            ProjectLampiranSeeder::class,
+
+            // Donatur
+            ProjectDonationSeeder::class,
+            // Volunteer
+
+            //Group Chat
+            ProjectGroupChatSeeder::class,
         ]
         );
     }
