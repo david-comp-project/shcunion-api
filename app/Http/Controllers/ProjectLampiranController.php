@@ -78,7 +78,7 @@ class ProjectLampiranController extends Controller
                 // $path = $file->storeAs('project_lampiran', $fileName, 'public');
 
                 
-                $path = $this->getPathFile($file, 'project_lampiran');
+                $path = $this->getPathFile($file, 'project/project_lampiran');
 
                 // Simpan data lampiran ke database
                 $lampiran = ProjectLampiran::create([

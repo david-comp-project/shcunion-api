@@ -302,7 +302,7 @@ class ProjectController extends Controller
             // Jika ada gambar yang diupload
             if ($request->hasFile('project_image')) {
                 $image = $request->file('project_image');
-                $imagePath = $this->getPathFile($image, 'project_images');
+                $imagePath = $this->getPathFile($image, 'project/project_image');
                 // $imageName =date('dmY') . '_' . $image->getClientOriginalName();
                 // $imagePath = $image->storeAs('project_images', $imageName, 'public');
                 $validated['project_image_path'] = $imagePath;
@@ -477,14 +477,14 @@ class ProjectController extends Controller
     
             if ($request->hasFile('project_image')) {
                 $image = $request->file('project_image');
-                $imagePath = $this->getPathFile($image, 'project_images');
+                $imagePath = $this->getPathFile($image, 'project/project_image');
                 $validated['project_image_path'] = $imagePath;
             }
 
             $groupAvatarPath = null;
             if ($request->hasFile('project_group_avatar')) {
                 $image = $request->file('project_group_avatar');
-                $groupAvatarPath = $this->getPathFile($image, 'project_images');
+                $groupAvatarPath = $this->getPathFile($image, 'project/group_avatar');
             }
     
             $validated['creator_id'] = $userAuth->user_id;
@@ -623,7 +623,7 @@ class ProjectController extends Controller
             if ($request->hasFile('creator_file')) {
                 $file = $request->file('creator_file');
                 $fileName = strtolower($file->getClientOriginalName());
-                $filePath = $this->getPathFile($file, 'creator_documents');
+                $filePath = $this->getPathFile($file, 'project/creator_document');
 
             }
     
@@ -681,7 +681,7 @@ class ProjectController extends Controller
             if ($request->hasFile('beneficiary_file')) {
                 $file = $request->file('beneficiary_file');
                 $fileName = strtolower($file->getClientOriginalName());
-                $filePath = $this->getPathFile($file,'beneficiary_documents');
+                $filePath = $this->getPathFile($file,'beneficiary_document');
             }
     
             // Simpan data dengan create()
