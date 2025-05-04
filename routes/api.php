@@ -36,6 +36,9 @@ Route::prefix('v1')->group(function () {
     Route::post('/password/reset', [AuthController::class, 'resetPassword']);
     Route::post('/password/send-reset', [AuthController::class, 'sendResetPassword']);
     Route::get('/up-health', [TestController::class, 'health']);
+    //statistic
+    Route::get('/statistic', [TestController::class, 'getStatistic']);
+
 
 
     Route::middleware(['auth.api'])->group(function () {
