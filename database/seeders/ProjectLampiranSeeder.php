@@ -23,6 +23,7 @@ class ProjectLampiranSeeder extends Seeder
         $statuses = ['active', 'pending', 'archived'];
         $sections = ['lampiran', 'laporan akhir'];
         $tags = ['dokumen pendukung'];
+        $namaLampiran = ['Rincian Pengelolaan Kegiatan 1', 'Rincian Pengelolaan Kegiatan 2', 'Rincian Pengelolaan Kegiatan 3', 'Estimasi Kebutuhan Dana', 'dokumen'];
 
         foreach ($projects as $projectId) {
             $lampiranCount = rand(2, 3); // Buat 2-5 lampiran per project
@@ -32,7 +33,7 @@ class ProjectLampiranSeeder extends Seeder
                     'project_lampiran_id' => Str::uuid(),
                     'project_id' => $projectId,
                     'uploader_id' => $uploaders[array_rand($uploaders)],
-                    'nama_lampiran' => fake()->words(2, true) . '.' . fake()->fileExtension(),
+                    'nama_lampiran' => $namaLampiran[array_rand($namaLampiran)],
                     'path_lampiran' => 'project/project_lampiran/Document Test ' . fake()->numberBetween(1, 3) . '.pdf',
                     'tipe_lampiran' => fake()->mimeType(),
                     'size_lampiran' => fake()->numberBetween(100, 2048) . ' KB',

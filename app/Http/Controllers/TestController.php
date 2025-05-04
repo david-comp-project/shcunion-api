@@ -17,6 +17,27 @@ class TestController extends Controller
 
     }
 
+    public function getStatistic() {
+        //total project
+        $totalProject = DB::table('projects')->count();
+        // total dana terkumpul
+        $totalDana = DB::table('donation_payments')->sum('donation_amount');
+        // total donatur
+        $totalDonatur = DB::table('donation_payments')->count('donatur_id');
+        // total relawan
+        $totalRelawan = DB::table('volunteer_involvements')->count('volunteer_id');
+
+        return response()->json([
+            'statistic' => [
+                'total_project' => $totalProject,
+                'total_dana' => $totalDana,
+                'total_donatur' => $totalDonatur,
+                'total_volunteer' => $totalRelawan
+            ]
+        
+        ], 200);
+    }
+
     
     //GroupChat List by user
     public function test(User $user) {

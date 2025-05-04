@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             PaymentMethodSeeder::class,
             SocialMediaSeeder::class,
 
+            
             ProjectSeeder::class,
             ProjectCreatorInformationSeeder::class,
             ProjectBeneficialInformationSeeder::class,
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
             // Donatur
             ProjectDonationSeeder::class,
             // Volunteer
-
+            ProjectVolunteerSeeder::class,
             //Group Chat
             ProjectGroupChatSeeder::class,
         ]

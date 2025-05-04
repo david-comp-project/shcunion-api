@@ -27,11 +27,11 @@ class ProjectDonationSeeder extends Seeder
         $channelNames = ['BCA', 'Mandiri', 'OVO', 'DANA', 'ShopeePay', 'Gopay', 'VISA', 'MasterCard'];
 
         foreach ($donationProjects as $projectId) {
-            $count = rand(3, 10); // Setiap project dapat 3-10 donasi
+            $count = rand(50, 100); // Setiap project dapat 3-10 donasi
 
             for ($i = 0; $i < $count; $i++) {
                 $donaturId = fake()->boolean(70) ? $users[array_rand($users)] : null; // 70% donatur login, 30% anonymous
-                $donationAmount = fake()->randomElement([25000, 50000, 100000, 150000, 200000, 500000]);
+                $donationAmount = fake()->randomElement([25000, 50000, 100000, 150000, 200000, 500000, 1000000, 2000000, 5000000]);
 
                 DonationPayment::create([
                     'donation_payment_id' => Str::uuid(),
