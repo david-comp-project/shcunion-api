@@ -222,7 +222,7 @@ class ProjectSeeder extends Seeder
                 'title' => 'Donasi Alat Tulis untuk Siswa Kurang Mampu',
                 'description' => 'Mengumpulkan dana untuk membeli alat tulis bagi siswa di daerah terpencil.',
                 'category' => 'donation',
-                'status' => 'in_active',
+                'status' => 'in_progress',
                 'image' => 'project/project_image/alat_tulis.jpg',
             ],
             [
@@ -252,7 +252,7 @@ class ProjectSeeder extends Seeder
                 'title' => 'Pendamping Lansia di Panti Jompo',
                 'description' => 'Kegiatan menemani, membantu aktivitas, dan berbagi cerita dengan lansia.',
                 'category' => 'volunteer',
-                'status' => 'in_active',
+                'status' => 'in_review',
                 'image' => 'project/project_image/panti_jompo.jpg',
                 'roles' => [
                     ['key' => 'Pendamping', 'value' => 6],

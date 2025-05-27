@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Enums\UserStatusEnum;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -19,11 +20,13 @@ class UserSeeder extends Seeder
                 'first_name' => 'David',
                 'last_name'  => 'Dwi Nugroho',
                 'email'      => 'daviddwinugraha2@gmail.com',
+                'profile_picture' => 'profile/45a231ea-ffb3-4cd0-b88a-7f2c51c06930_user-default.png',
             ],
             [
                 'first_name' => 'Super',
                 'last_name'  => 'Admin',
                 'email'      => 'superadmin@gmail.com',
+                'profile_picture' => 'profile/45a231ea-ffb3-4cd0-b88a-7f2c51c06930_user-default.png',
             ],
         ];
 
@@ -34,7 +37,7 @@ class UserSeeder extends Seeder
                 // Jika Anda ingin menggunakan computed full_name, Anda bisa menggabungkannya
                 'full_name'        => $userData['first_name'] . ' ' . $userData['last_name'],
                 'jenis_kelamin'    => $jenisKelamin[array_rand($jenisKelamin)],
-                'profile_picture'  => null, // Kosongkan atau isi sesuai kebutuhan
+                'profile_picture'  => $userData['profile_picture'], // Kosongkan atau isi sesuai kebutuhan
                 'email'            => $userData['email'],
                 'password'         => bcrypt('password123'),
                 'email_verified_at'=> now(),
@@ -52,8 +55,11 @@ class UserSeeder extends Seeder
                 'phone_number'     => '', // Default kosong
                 'nik'              => '', // Default kosong
                 'birth_date'       => null, // Nilai null jika belum diketahui
-                'job'              => '', // Default kosong
-                'status'          => 'verified', // Default active
+                'job'              => 'Developer', // Default kosong
+                'organization_name' => 'SHCUnion Company', // Nama organisasi default
+                'jabatan'          => 'Founder', // Jabatan default
+                'status'          => UserStatusEnum::VERIFIED, // Default active
+                'total_points' => 100, // Total poin default
             ]);
 
             $account->assignRole('admin');

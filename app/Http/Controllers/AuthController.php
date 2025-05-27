@@ -109,6 +109,7 @@ class AuthController extends Controller
                     . "&access_token=" . rawurlencode($token)
                     . "&refresh_token=" . rawurlencode($refreshToken);
 
+            
             // Log URL sebelum redirect (untuk debugging)
             // Log::info('Redirecting to frontend:', ['url' => $url]);
 
