@@ -27,7 +27,12 @@ class ProjectDonationSeeder extends Seeder
         $channelNames = ['BCA', 'Mandiri', 'OVO', 'DANA', 'ShopeePay', 'Gopay', 'VISA', 'MasterCard'];
 
         foreach ($donationProjects as $projectId) {
-            $count = rand(50, 100); // Setiap project dapat 3-10 donasi
+            $project = Project::find($projectId);
+            if ($project->project_status == 'in_review') {
+                continue; // Lewati project yang masih dalam review
+            }
+
+            $count = rand(50, 110); // Setiap project dapat 3-10 donasi
 
             for ($i = 0; $i < $count; $i++) {
                 $donaturId = fake()->boolean(70) ? $users[array_rand($users)] : null; // 70% donatur login, 30% anonymous
