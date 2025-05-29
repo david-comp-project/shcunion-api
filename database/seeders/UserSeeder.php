@@ -79,7 +79,7 @@ class UserSeeder extends Seeder
                     'full_name'        => $firstName . ' ' . $lastName,
                     'jenis_kelamin'    => $jenisKelamin[array_rand($jenisKelamin)],
                     'profile_picture'  => null, // Kosongkan atau isi sesuai kebutuhan
-                    'email'            => 'email' => "user_{$i}@example.com",
+                    'email'            => "user_{$i}@example.com",
                     'password'         => bcrypt('password123'),
                     'email_verified_at'=> now(),
 
