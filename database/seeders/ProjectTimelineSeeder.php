@@ -21,8 +21,21 @@ class ProjectTimelineSeeder extends Seeder
             return;
         }
 
+        $descriptions = [
+            'Persiapan lokasi bantuan',
+            'Distribusi logistik ke penerima',
+            'Sosialisasi ke masyarakat',
+            'Koordinasi relawan',
+            'Pemantauan progres lapangan',
+            'Pembuatan laporan kegiatan',
+            'Verifikasi kebutuhan donasi',
+            'Pengumpulan data penerima',
+            'Penyaluran dana tahap awal',
+            'Evaluasi hasil kegiatan'
+        ];
+
         foreach ($projects as $projectId) {
-            $baseDate = Carbon::now()->subDays(10);
+            $baseDate = now()->subDays(10);
 
             for ($i = 0; $i < 10; $i++) {
                 $timelineDate = $baseDate->copy()->addDays($i);
@@ -34,11 +47,13 @@ class ProjectTimelineSeeder extends Seeder
                 ]);
 
                 for ($j = 0; $j < 3; $j++) {
+                    $description = $descriptions[($i + $j) % count($descriptions)];
+
                     $timeline->projectTimelineDetails()->create([
                         'project_timeline_detail_id' => Str::uuid(),
                         'project_timeline_id' => $timeline->project_timeline_id,
-                        'description' => fake()->sentence(6),
-                        'time' => $timelineDate->copy()->addHours($j)->format('H:i:s'),
+                        'description' => $description,
+                        'time' => $timelineDate->copy()->addHours($j + 9)->format('H:i:s'), // jam 9, 10, 11
                         'icon_id' => $icons[array_rand($icons)],
                     ]);
                 }
