@@ -29,14 +29,20 @@ class ProjectLampiranSeeder extends Seeder
             $lampiranCount = rand(2, 3); // Buat 2-5 lampiran per project
 
             for ($i = 0; $i < $lampiranCount; $i++) {
+                $documentNumber = rand(1, 3);
+                $mimeTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                $size = rand(100, 2048);
+                
                 ProjectLampiran::create([
                     'project_lampiran_id' => Str::uuid(),
                     'project_id' => $projectId,
                     'uploader_id' => $uploaders[array_rand($uploaders)],
                     'nama_lampiran' => $namaLampiran[array_rand($namaLampiran)],
-                    'path_lampiran' => 'project/project_lampiran/Document Test ' . fake()->numberBetween(1, 3) . '.pdf',
-                    'tipe_lampiran' => fake()->mimeType(),
-                    'size_lampiran' => fake()->numberBetween(100, 2048) . ' KB',
+
+                    'path_lampiran' => "project/project_lampiran/Document Test {$documentNumber}.pdf",
+                    'tipe_lampiran' => $mimeTypes[array_rand($mimeTypes)],
+                    'size_lampiran' => "{$size} KB",
+
                     'tag' => $tags[array_rand($tags)],
                     'section' => $sections[array_rand($sections)],
                     'status' => $statuses[array_rand($statuses)],

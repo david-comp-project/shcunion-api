@@ -9,7 +9,7 @@ use App\Models\Project;
 
 class ProjectCreatorInformationSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         $projects = Project::all();
 
@@ -18,27 +18,38 @@ class ProjectCreatorInformationSeeder extends Seeder
             return;
         }
 
+        // Contoh data dummy manual
+        $names = ['Andi Prasetyo', 'Budi Santoso', 'Citra Dewi', 'Dewi Lestari'];
+        $emails = ['andi@example.com', 'budi@example.com', 'citra@example.com', 'dewi@example.com'];
+        $phones = ['081234567890', '082345678901', '083456789012', '084567890123'];
+        $types  = ['perorangan', 'organisasi'];
+        $orgs   = ['PT. Sukses Selalu', 'CV. Maju Terus', 'Yayasan Aksi', 'Komunitas Koding'];
+
         foreach ($projects as $project) {
-            $creatorType = fake()->randomElement(['perorangan', 'organisasi']);
+            // Pilih random data dari array
+            $creatorType = $types[array_rand($types)];
+            $idx = array_rand($names);
 
             DB::table('project_creator_informations')->insert([
-                'project_creator_information_id' => Str::uuid(),
-                'project_id' => $project->project_id,
-                'creator_name' => fake()->name(),
-                'creator_email' => fake()->unique()->safeEmail(),
-                'creator_phone' => fake()->phoneNumber(),
-                'creator_type' => $creatorType,
-                'creator_organization_name' => $creatorType === 'perorangan' ? null : fake()->company(),
-                'creator_website' => $creatorType === 'perorangan' ? null : fake()->url(),
-                'creator_social_media' => json_encode([
-                    'instagram' => '@' . fake()->userName(),
-                    'twitter' => '@' . fake()->userName()
+                'project_creator_information_id'   => Str::uuid(),
+                'project_id'                       => $project->project_id,
+                'creator_name'                     => $names[$idx],
+                'creator_email'                    => $emails[$idx],
+                'creator_phone'                    => $phones[$idx],
+                'creator_type'                     => $creatorType,
+                'creator_organization_name'        => $creatorType === 'organisasi' ? $orgs[array_rand($orgs)] : null,
+                'creator_website'                  => $creatorType === 'organisasi'
+                                                        ? 'https://www.' . Str::slug($orgs[array_rand($orgs)], '') . '.com'
+                                                        : null,
+                'creator_social_media'             => json_encode([
+                    'instagram' => '@' . Str::lower(Str::random(6)),
+                    'twitter'   => '@' . Str::lower(Str::random(6)),
                 ]),
-                'creator_identifier' => strtoupper(Str::random(16)),
-                'creator_file_path' => null,
-                'creator_file_name' => null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'creator_identifier'               => strtoupper(Str::random(16)),
+                'creator_file_path'                => null,
+                'creator_file_name'                => null,
+                'created_at'                       => now(),
+                'updated_at'                       => now(),
             ]);
         }
     }
