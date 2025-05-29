@@ -136,7 +136,7 @@ Route::prefix('v1')->group(function () {
                         Route::post('/{project}/creator/detail', [ProjectController::class, 'storeProjectCreator']);
                         Route::post('/{project}/beneficiary/detail', [ProjectController::class, 'storeProjectBeneficial']);
                         Route::post('/{project}/lampiran', [ProjectLampiranController::class,'storeProjectLampiran']);
-                        Route::post('/{project}/volunteer/store', [VolunteerController::class, 'storeVolunteer']);
+                        Route::post('/{project}/volunteer/store', [VolunteerController::class, 'storeVolunteer'])->>withoutMiddleware('auth.project');
     
                     Route::middleware(['role:admin|verified|active'])->group(function () {
                         Route::put('/{project}/detail', [ProjectController::class,'updateProjectDetail']);
