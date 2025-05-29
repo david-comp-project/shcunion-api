@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Enums\UserStatusEnum;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Testing\Fakes\Fake;
 
 class UserSeeder extends Seeder
 {
@@ -13,7 +15,8 @@ class UserSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
+    {   
+        $faker = Faker::create();
         $jenisKelamin = ['laki-laki', 'perempuan'];
         $userAdmin = [
             [
@@ -69,13 +72,13 @@ class UserSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
         
             $user = User::create([
-                    'first_name'       => fake()->firstName(),
-                    'last_name'        => fake()->lastName(),
+                    'first_name'       => $faker->firstName(),
+                    'last_name'        => $faker->lastName(),
                     // Jika Anda ingin menggunakan computed full_name, Anda bisa menggabungkannya
-                    'full_name'        => fake()->firstName() . ' ' . fake()->lastName(),
+                    'full_name'        => $faker->firstName() . ' ' . $faker->lastName(),
                     'jenis_kelamin'    => $jenisKelamin[array_rand($jenisKelamin)],
                     'profile_picture'  => null, // Kosongkan atau isi sesuai kebutuhan
-                    'email'            => fake()->unique()->safeEmail(),
+                    'email'            => $faker->unique()->safeEmail(),
                     'password'         => bcrypt('password123'),
                     'email_verified_at'=> now(),
 
