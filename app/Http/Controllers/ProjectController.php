@@ -809,6 +809,7 @@ class ProjectController extends Controller
                             'role' => $role,
                             'jumlah' => $jumlah,
                             'sisa' => max(0, $jumlah - $terisi),
+                            'terisi' => $terisi
                         ];
                     })->values(),
 
@@ -1007,6 +1008,8 @@ class ProjectController extends Controller
         ->where('project_id', $project->project_id)
         ->get()
         ->map(function ($proj) {
+            $proj->project_start_date = $proj->startDateFormat;
+            $proj->project_end_date = $proj->endDateFormat;
             // Pastikan relasi ada sebelum mengakses properti
             $proj->project_image_path = $this->getUrlFile($proj->project_image_path);
             if ($proj->projectCreatorInformation) {
@@ -1019,6 +1022,7 @@ class ProjectController extends Controller
 
             return $proj;
         });
+
 
     return response()->json([
         'message' => 'Berhasil Mengambil',

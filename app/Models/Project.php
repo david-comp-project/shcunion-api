@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
+
 {
     //
     use HasUuids, HasFiltersTrait, SoftDeletes;
