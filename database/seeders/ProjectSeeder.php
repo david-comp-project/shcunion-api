@@ -308,6 +308,27 @@ class ProjectSeeder extends Seeder
 
         foreach ($projects as $index => $proj) {
             $isDonation = $proj['category'] === 'donation';
+            $projectTargetAmount = $isDonation ? rand(50_000_000, 200_000_000) : rand(0, 2000);
+
+            if (!$isDonation) {
+                $roleCount = count($proj['roles']);
+
+                // Buat array acak proporsi untuk masing-masing role
+                $randoms = [];
+                $total = 0;
+                for ($i = 0; $i < $roleCount; $i++) {
+                    $random = rand(1, 100);
+                    $randoms[] = $random;
+                    $total += $random;
+                }
+
+                // Ubah roles dengan nilai berdasarkan proporsi
+                foreach ($proj['roles'] as $index => $role) {
+                    $percentage = $randoms[$index] / $total; // proporsi dari total
+                    $proj['roles'][$index]['value'] = round($percentage * $projectTargetAmount);
+                }
+            }
+          
 
             DB::table('projects')->insert([
                 'project_id' => Str::uuid(),
@@ -315,7 +336,7 @@ class ProjectSeeder extends Seeder
                 'project_description' => $proj['description'],
                 'project_start_date' => Carbon::now()->addDays($index * 2),
                 'project_end_date' => Carbon::now()->addMonths(rand(2, 6))->addDays($index * 5),
-                'project_target_amount' => $isDonation ? rand(50_000_000, 200_000_000) : rand(0, 2000),
+                'project_target_amount' => $projectTargetAmount,
                 'creator_id' => $adminUsers->random()->user_id,
                 'project_status' => $proj['status'],
                 'project_category' => $proj['category'],
