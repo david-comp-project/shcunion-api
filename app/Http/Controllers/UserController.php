@@ -39,9 +39,9 @@ class UserController extends Controller
         $userData = Cache::remember($cacheKey, now()->addMinutes(5), function () use ($user) {
             return [
                 ...$user->toArray(),
-                'profile_picture' => $user->profile_picture ? asset(Storage::url($user->profile_picture)) : null,
-                'profile_cover' => $user->profile_cover ? asset(Storage::url($user->profile_cover)) : null,
-                'scan_ktp' => $user->scan_ktp ? asset(Storage::url($user->scan_ktp)) : null,
+                'profile_picture' => $user->profile_picture ? $this->getUrlFile($user->profile_picture) : null,
+                'profile_cover' => $user->profile_cover ? $this->getUrlFile($user->profile_cover) : null,
+                'scan_ktp' => $user->scan_ktp ? $this->getUrlFile($user->scan_ktp) : null,
                 'badge' => $user->getBadge()->value,
                 'badge_color' => $user->getBadgeColor(),
                 'suspended_time' => $user->suspended_date ? (int) Carbon::parse($user->suspended_date)->diffInDays(now()) * -1: null, // Hitung hari tersisa
@@ -117,8 +117,9 @@ class UserController extends Controller
 
             if ($request->hasFile('scan_ktp')) {
                 $file = $request->file('scan_ktp');
-                $fileName = Str::uuid() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('profile', $fileName, 'public');
+                // $fileName = Str::uuid() . '_' . $file->getClientOriginalName();
+                // $filePath = $file->storeAs('profile', $fileName, 'public');
+                $filePath = $this->getPathFile($file, 'profile/ktp');
                 $validated['scan_ktp'] = $filePath;
 
                 // Log::info("KTP saved at: " . $filePath);
@@ -141,9 +142,12 @@ class UserController extends Controller
 
             $userData = [
                 ...$user->toArray(),
-                'profile_picture' => $user->profile_picture ? asset(Storage::url($user->profile_picture)) : null,
-                'profile_cover' => $user->profile_cover ? asset(Storage::url($user->profile_cover)) : null,
-                'scan_ktp' => $user->scan_ktp ? asset(Storage::url($user->scan_ktp)) : null,
+                // 'profile_picture' => $user->profile_picture ? asset(Storage::url($user->profile_picture)) : null,
+                // 'profile_cover' => $user->profile_cover ? asset(Storage::url($user->profile_cover)) : null,
+                // 'scan_ktp' => $user->scan_ktp ? asset(Storage::url($user->scan_ktp)) : null,
+                'profile_picture' => $user->profile_picture ? $this->getUrlFile($user->profile_picture) : null,
+                'profile_cover' => $user->profile_cover ? $this->getUrlFile($user->profile_cover) : null,
+                'scan_ktp' => $user->scan_ktp ? $this->getUrlFile($user->scan_ktp) : null,
             ];
     
             Cache::put($cacheKey, $userData, now()->addMinutes(10));
@@ -214,7 +218,7 @@ class UserController extends Controller
             return [
                 'user_id' => $user->user_id,
                 'user_full_name' => $user->full_name ? $user->full_name : $user->userFullName,
-                'user_avatar' => $user->profile_picture ? asset(Storage::url($user->profile_picture)) : null,
+                'user_avatar' => $user->profile_picture ? $this->getUrlFile($user->profile_picture) : null,
                 'user_created' => $user->userCreated,
                 'user_status' => $user->status,
                 'user_project' => $user->projects()->count(),
@@ -576,7 +580,7 @@ class UserController extends Controller
             return [
                 'user_id' => $user->user_id,
                 'user_full_name' => $user->full_name ? $user->full_name : $user->userFullName,
-                'user_avatar' => $user->profile_picture ? asset(Storage::url($user->profile_picture)) : null,
+                'user_avatar' => $user->profile_picture ? $this->getUrlFile($user->profile_picture) : null,
                 'user_created' => $user->userCreated,
                 'user_status' => $user->status,
                 'user_project' => $total_project,
