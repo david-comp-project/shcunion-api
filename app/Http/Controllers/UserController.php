@@ -98,8 +98,9 @@ class UserController extends Controller
 
             if ($request->hasFile('profile_picture')) {
                 $file = $request->file('profile_picture');
-                $fileName = Str::uuid() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('profile', $fileName, 'public');
+                // $fileName = Str::uuid() . '_' . $file->getClientOriginalName();
+                // $filePath = $file->storeAs('profile', $fileName, 'public');
+                $filePath = $this->getPathFile($file, 'profile/user');
                 $validated['profile_picture'] = $filePath;
 
                 // Log::info("Profile Picture saved at: " . $filePath);
@@ -107,8 +108,9 @@ class UserController extends Controller
 
             if ($request->hasFile('profile_cover')) {
                 $file = $request->file('profile_cover');
-                $fileName = Str::uuid() . '_' . $file->getClientOriginalName();
-                $filePath = $file->storeAs('profile', $fileName, 'public');
+                // $fileName = Str::uuid() . '_' . $file->getClientOriginalName();
+                // $filePath = $file->storeAs('profile', $fileName, 'public');
+                $filePath = $this->getPathFile($file, 'profile/cover');
                 $validated['profile_cover'] = $filePath;
                 // Log::info("Profile Cover saved at: " . $filePath);
             }
