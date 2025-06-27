@@ -387,7 +387,7 @@ class ChatController extends Controller
             // $fileName = uniqid() .'.'. $file->getClientOriginalExtension();
             // $imagePath = $file->storeAs('uploads/images', $fileName, 'public');
 
-            $imagePath = $this->getPathFile($file, 'uploads/images', 'public');
+            $imagePath = $this->getPathFile($file, 'chat/private');
         }
 
 
@@ -454,7 +454,7 @@ class ChatController extends Controller
             // $fileName = uniqid() .'.'. $file->getClientOriginalExtension();
             // $imagePath = $file->storeAs('uploads/images', $fileName, 'public');
 
-            $imagePath = $this->getPathFile($file, 'uploads/images', 'public');
+            $imagePath = $this->getPathFile($file, 'chat/group');
         }
 
 

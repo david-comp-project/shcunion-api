@@ -158,7 +158,8 @@ class ProjectLampiranController extends Controller
 
             $file = $request->file('project_lampiran');
             $fileName =  strtolower($file->getClientOriginalName());
-            $filePath = $file->storeAs('project_lampiran', $fileName, 'public');
+            // $filePath = $file->storeAs('project_lampiran', $fileName, 'public');
+            $filePath = $this->getPathFile($file, 'project/project_lampiran');
 
             
             $projectLampiran->update([  

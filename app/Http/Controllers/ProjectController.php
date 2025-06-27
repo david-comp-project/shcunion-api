@@ -681,7 +681,7 @@ class ProjectController extends Controller
             if ($request->hasFile('beneficiary_file')) {
                 $file = $request->file('beneficiary_file');
                 $fileName = strtolower($file->getClientOriginalName());
-                $filePath = $this->getPathFile($file,'beneficiary_document');
+                $filePath = $this->getPathFile($file,'project/beneficiary_document');
             }
     
             // Simpan data dengan create()

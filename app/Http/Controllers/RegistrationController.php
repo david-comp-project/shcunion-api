@@ -26,7 +26,7 @@ class RegistrationController extends Controller
                 'github'   => '',
                 'medium'   => '',
             ]);
-            $validatedData['profile_picture'] = 'profile/user-default.png'; // Sesuaikan path gambar default
+            $validatedData['profile_picture'] = 'profile/user/user-default.png'; // Sesuaikan path gambar default
 
             $user = User::create($validatedData);
 

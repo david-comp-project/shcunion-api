@@ -342,7 +342,7 @@ class DonationController extends Controller
 
             if ($request->hasFile('scan_rekening')) {
                 $file = $request->file('scan_rekening');
-                $imagePath = $this->getPathFile($file, 'withdrawal');
+                $imagePath = $this->getPathFile($file, 'project/withdrawal');
 
                 $validated['scan_rekening'] = $imagePath;
             }
@@ -385,7 +385,7 @@ class DonationController extends Controller
 
     
             // Simpan file ke folder 'withdrawal' di disk 'public'
-            $imagePath = $this->getPathFile($file, 'withdrawal', 'public');
+            $imagePath = $this->getPathFile($file, 'project/withdrawal');
         }
     
         // Update data withdrawal
@@ -399,7 +399,7 @@ class DonationController extends Controller
             'withdrawal_detail' => [
                 'id' => $withdrawalDonation->id,
                 'status_penarikan' => $withdrawalDonation->status_penarikan,
-                'bukti_transfer_url' => $this->getUrlFile($withdrawalDonation->bukti_transfer, 'public')
+                'bukti_transfer_url' => $this->getUrlFile($withdrawalDonation->bukti_transfer)
             ]
         ], 201);
     }
