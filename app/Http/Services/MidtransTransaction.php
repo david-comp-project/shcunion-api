@@ -149,10 +149,10 @@ class MidtransTransaction
         ];
     }
 
-    public function getSnapToken($data)
+    public function getSnapToken($data, $amount)
     {
         $orderId = $data->donation_payment_id;
-        $amount = $data->donation_amount;
+        // $amount = $data->donation_amount;
     
         // Ambil informasi tambahan
         $user = Auth('api')->user();

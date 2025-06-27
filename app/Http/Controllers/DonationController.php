@@ -180,6 +180,7 @@ class DonationController extends Controller
                 'email' => $data['email'],
                 'transaction_id' => $data['transaction_id'],
                 'transaction_time' => $data['transaction_time'],
+                'donation_amount' => $data['gross_amount'],
             ]);
         }
         
@@ -245,7 +246,8 @@ class DonationController extends Controller
         ]);
     
         $user = Auth('api')->check() ? Auth('api')->user() : null;
-    
+        
+        //jangan disimpen dulu
         $donation = DonationPayment::create([
             'donation_code' => 'DON_' . Str::uuid(),
             'project_id' => $project->project_id,
@@ -254,10 +256,10 @@ class DonationController extends Controller
             'address' => $user->address,
             'full_name' => $user->full_name,
             'phone_number' => $user->phone_number,
-            'donation_amount' => $validated['donation_amount'],
+            // 'donation_amount' => $validated['donation_amount'],
         ]);
     
-        return $this->midtransService->getSnapToken($donation);
+        return $this->midtransService->getSnapToken($donation, $validated['donation_amount']);
     }
     
 
