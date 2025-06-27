@@ -326,7 +326,7 @@ class UserController extends Controller
             // Handle Upload Gambar
             if ($request->hasFile('reported_image')) {
                 $file = $request->file('reported_image');
-                $validated['reported_path_file'] = $this->getPathFile($file, 'uploads/report/images', 'public');
+                $validated['reported_path_file'] = $this->getPathFile($file, 'report');
             }
     
             // Simpan laporan
