@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
-            $table->decimal('donation_amount', 15, 2);
+            $table->decimal('donation_amount', 15, 2)->nullable();
             $table->string('channel_payment')->nullable();
             $table->string('channel_name')->nullable();
             $table->uuid('payment_method_id')->references('payment_method_id')->on('payment_methods')->onDelete('cascade')->nullable();
